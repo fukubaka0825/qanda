@@ -1,0 +1,65 @@
+<div class = "row">
+    <div class = "col-md-12">
+        <h2><%= @question.title %></h2>
+        <div>
+            質問内容: <%= @question.content %>
+        </div>
+        <div>
+             名前: <%= @question.name %>
+        </div>
+        <hr>
+        <div>
+            <h3>回答一覧</h3> 
+            <table class = "table table-striped">
+                <!--質問に配列で回答入ってるよ-->
+                <% if @question.answers.any? %>
+                <thead class="thead-light">
+                    <tr>
+                        <td>回答</td>
+                        <td>名前</td>
+                        <td>メニュー</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% @question.answers.each do |answer| %>
+                    <tr>
+                        <td>
+                            <%= answer.content %>
+                        </td>
+                          <td>
+                            <%= answer.name %>
+                        </td>
+                        <td>[<%= link_to '編集',edit_question_answer_path(@question,answer) %>]
+                        [<%= link_to '削除',question_answer_path(@question,answer),
+                        method: :delete, data:{ confirm: '本当に削除しますか？'} %>]
+                        </td>
+                    </tr>
+                    <% end %>
+                </tbody>
+                <% else %>
+                <p>回答はありません</p>
+                <% end %>
+                </table>
+                
+        </div>
+         <hr>
+        <h3>回答投稿</h3>
+        <%= form_with model: [@question,@answer],local: true do |f| %>
+        <%= f.hidden_field:question_id,{ value: @question.id} %>
+        <div class="form-qroup">
+            <label>名前</label>
+        <%= f.text_field:name,class: 'form-control' %>
+         </div>
+        <div class="form-qroup">
+            <label>内容</label>
+        <%= f.text_area:content,class: 'form-control' %>
+        <div class="text-center">
+            <%= f.submit "Post",class: 'btn btn-primary' %>
+        </div>
+        <% end %>
+         </div>
+        <div>
+            <%= link_to '質問一覧へ',root_path %>
+        </div>
+    </div>
+</div>
