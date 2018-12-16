@@ -47,7 +47,7 @@ class QuestionsController < ApplicationController
   
   def question_params
     # デバックツール
-    ## byebug
+    # byebug
     params.require(:question).permit(:name,:title,:content)
   end
 
