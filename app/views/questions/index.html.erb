@@ -5,6 +5,7 @@
         <table class = "table table-striped">
             <thead class="thead-light">
                 <tr>
+                    <th>名前</th>
                     <th>題名</th>
                     <th>メニュー</th>
                 </tr>
@@ -12,6 +13,7 @@
             <tbody>
                 <% @questions.each do|question| %>
                 <tr>
+                    <td><%= question.name %></td>
                     <td><%= link_to question.title, question_path(question) %></td>
                     <td>[<%= link_to '編集',edit_question_path(question) %>]
                     [<%= link_to '削除',question_path(question),method: :delete, data:{ confirm: '本当に削除しますか'} %>]
