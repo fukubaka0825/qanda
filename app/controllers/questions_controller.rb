@@ -1,7 +1,8 @@
 class QuestionsController < ApplicationController
   before_action :set_question,only: [:show,:edit,:update,:destroy]
   def index
-    @questions = Question.all
+    # ２0件ずつ
+    @questions = Question.page(params[:page]).per(20)
   end
 
   def show
@@ -42,6 +43,7 @@ class QuestionsController < ApplicationController
   
   def set_question
      # 紐づいてる回答も引っ張ってきてる　二回SQL投げてる
+     #TODO 紐づいてもってきてる回答ページネート
      @question = Question.find(params[:id])
   end
   

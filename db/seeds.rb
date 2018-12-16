@@ -5,4 +5,10 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-Question.create(name: "TEST name 6" ,title:"Test question 6 " ,content: "Test content 6")
+
+# 開発環境指定
+if Rails.env == 'development'
+    (1..50).each do|i|
+    Question.create(name: "ユーザー#{i}",title: "タイトル#{i}" ,content: "本文#{i}")
+  end
+end
