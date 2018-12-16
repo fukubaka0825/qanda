@@ -1,10 +1,11 @@
 Rails.application.routes.draw do
+  get 'home/index'
   get 'mypage', to: 'users#me'
   post 'login', to: 'sessions#create'
   delete 'logout', to: 'sessions#destroy'
 
   # ルートパスにアクセスでindexアクション
-  root 'questions#index'
+  root 'home#index'
   # 必要なルーティング用意
   resources :questions do
     resources :answers
