@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   has_secure_password
+  
 
   validates :name,
     presence: true,
@@ -10,6 +11,9 @@ class User < ApplicationRecord
       message: 'は小文字英数字で入力してください'
     }
   validates :password,
+    length: { minimum: 8 }
+    
+  validates :email,
     length: { minimum: 8 }
 
   def age
