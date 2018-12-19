@@ -3,6 +3,9 @@
         <h2><%= @question.title %></h2>
         <div>
             質問内容: <%= @question.content %>
+            </div>
+        <div>
+            <%= image_tag @question.picture.url if @question.picture? %>
         </div>
         <div>
              名前: <%= @question.name %>

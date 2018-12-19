@@ -15,6 +15,7 @@ class QuestionsController < ApplicationController
   
   def create
     @question = Question.new(question_params)
+    # if @question.save! !でエラー吐くようにできる
     if @question.save
       redirect_to root_path, notice: '掲示板を作成しました'
     else
@@ -50,7 +51,7 @@ class QuestionsController < ApplicationController
   def question_params
     # デバックツール
     # byebug
-    params.require(:question).permit(:name,:title,:content)
+    params.require(:question).permit(:name,:title,:content,:picture)
   end
 
 end
