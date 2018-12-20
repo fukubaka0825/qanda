@@ -51,7 +51,7 @@ class QuestionsController < ApplicationController
   def question_params
     # デバックツール
     # byebug
-    params.require(:question).permit(:name,:title,:content,:picture)
+    params.require(:question).permit(:name,:title,:content,:picture,tag_ids: [])
   end
 
 end

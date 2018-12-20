@@ -7,6 +7,7 @@
                 <tr>
                     <th>名前</th>
                     <th>題名</th>
+                    <th>タグ</th>
                     <th>メニュー</th>
                 </tr>
             </thead>
@@ -15,6 +16,15 @@
                 <tr>
                     <td><%= question.name %></td>
                     <td><%= link_to question.title, question_path(question) %></td>
+                     <td>
+                    <% if question.tags.any? %>
+                        <%  question.tags.each do |tag| %>
+                    <span class="badge badge-primary"><%= tag.name %></span>
+                        <% end %>
+                    <% end %>
+                    </td>
+                    
+                    
                     <td>[<%= link_to '編集',edit_question_path(question) %>]
                     [<%= link_to '削除',question_path(question),method: :delete, data:{ confirm: '本当に削除しますか'} %>]
                     </td>

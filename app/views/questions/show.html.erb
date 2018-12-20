@@ -10,6 +10,13 @@
         <div>
              名前: <%= @question.name %>
         </div>
+        <% if @question.tags.any? %>
+        <div>
+         <% @question.tags.each do |tag| %>
+      <span class="badge badge-primary"><%= tag.name %></span>
+         <% end %>
+         </div>
+        <% end %>
         <hr>
         <div>
             <h3>回答一覧</h3> 
@@ -25,6 +32,7 @@
                 </thead>
                 <tbody>
                     <% @question.answers.each do |answer| %>
+                    
                     <tr>
                         <td>
                             <%= answer.content %>
@@ -57,7 +65,7 @@
             <label>内容</label>
         <%= f.text_area:content,class: 'form-control' %>
         <div class="text-center">
-            <%= f.submit "Post",class: 'btn btn-primary' %>
+            <%= f.submit "投稿",class: 'btn btn-primary' %>
         </div>
         <% end %>
          </div>
