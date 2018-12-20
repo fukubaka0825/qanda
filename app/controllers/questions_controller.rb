@@ -1,8 +1,9 @@
 class QuestionsController < ApplicationController
   before_action :set_question,only: [:show,:edit,:update,:destroy]
   def index
+    @questions = params[:tag_id].present? ? Tag.find(params[:tag_id]).questions : Question.all
     # ２0件ずつ
-    @questions = Question.page(params[:page]).per(20)
+    @questions = @questions.page(params[:page]).per(20)
   end
 
   def show
@@ -51,7 +52,7 @@ class QuestionsController < ApplicationController
   def question_params
     # デバックツール
     # byebug
-    params.require(:question).permit(:name,:title,:content,:picture,tag_ids: [])
+    params.require(:question).permit(:name,:title,:content,:picture,:user_id,tag_ids: [])
   end
 
 end

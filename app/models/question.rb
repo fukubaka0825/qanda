@@ -1,5 +1,6 @@
 class Question < ApplicationRecord
     has_many :answers,dependent: :delete_all
+    belongs_to :user
     # 関連がそこまで複雑でないなら一気に消せるdelete_allがパフォーマンスよし
     #一個づつ消していくのがdestroy
     has_many :question_tag_relations,dependent: :delete_all

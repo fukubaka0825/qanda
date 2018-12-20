@@ -1,10 +1,26 @@
 <h1>脱オタクファッションサロン</h1>
-<h2>投稿一覧</h2>
+<div class="d-flex align-items-center">
+  <h1>掲示板一覧</h1>
+  <div class="ml-auto boards__linkBox">
+    <%= form_tag questions_path, method: :get, class: 'questions__searchForm' do %>
+      <%= select_tag :tag_id,
+                     options_from_collection_for_select(Tag.all, :id, :name, params[:tag_id]),
+                     {
+                       prompt: 'タグで絞り込み',
+                       class: 'form-control questions__select',
+                       onchange: 'submit(this.form);'
+                     }
+      %>
+    <% end %>
+            <%= link_to '新規作成', new_question_path,class: 'btn btn-outline-dark' %>
+  </div>
+</div>
 <div class = row>
     <div class = "col-md-12">
         <table class = "table table-striped">
             <thead class="thead-light">
                 <tr>
+                    <th></th>
                     <th>名前</th>
                     <th>題名</th>
                     <th>タグ</th>
@@ -14,6 +30,11 @@
             <tbody>
                 <% @questions.each do|question| %>
                 <tr>
+                    <td>
+                        <% if !question.user.nil? %>
+                           <%= gravatar_for question.user %>
+                         <% end %>
+                     </td>
                     <td><%= question.name %></td>
                     <td><%= link_to question.title, question_path(question) %></td>
                      <td>
@@ -33,9 +54,6 @@
             </tbody>
         </table>
         <%= paginate @questions %>
-        <div>
-            <%= link_to '質問投稿', new_question_path %>
-        </div>
     </div>
     
 </div>

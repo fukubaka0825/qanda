@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_20_100745) do
+ActiveRecord::Schema.define(version: 2018_12_20_155549) do
 
   create_table "answers", force: :cascade do |t|
     t.integer "question_id"
@@ -18,7 +18,9 @@ ActiveRecord::Schema.define(version: 2018_12_20_100745) do
     t.text "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "user_id"
     t.index ["question_id"], name: "index_answers_on_question_id"
+    t.index ["user_id"], name: "index_answers_on_user_id"
   end
 
   create_table "question_tag_relations", force: :cascade do |t|
@@ -37,6 +39,8 @@ ActiveRecord::Schema.define(version: 2018_12_20_100745) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "picture"
+    t.integer "user_id"
+    t.index ["user_id"], name: "index_questions_on_user_id"
   end
 
   create_table "tags", force: :cascade do |t|
@@ -52,7 +56,11 @@ ActiveRecord::Schema.define(version: 2018_12_20_100745) do
     t.datetime "updated_at", null: false
     t.string "email"
     t.string "picture"
+    t.integer "question_id"
+    t.integer "answer_id"
+    t.index ["answer_id"], name: "index_users_on_answer_id"
     t.index ["name"], name: "index_users_on_name", unique: true
+    t.index ["question_id"], name: "index_users_on_question_id"
   end
 
 end

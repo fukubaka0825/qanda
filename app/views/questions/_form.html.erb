@@ -1,4 +1,7 @@
   <%= form_with model: @question, local: true  do |f| %>
+  <% if @current_user %> 
+  <%= f.hidden_field:user_id,{ value: @current_user.id} %>
+  <% end %>
         <div class="form-group">
             <label>名前</label>
             <%= f.text_field :name, class:"form-control" %>
