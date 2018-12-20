@@ -12,3 +12,13 @@ if Rails.env == 'development'
     Question.create(name: "ユーザー#{i}",title: "タイトル#{i}" ,content: "本文#{i}")
   end
 end
+#   ハッシュで渡すと複数追加
+   Tag.create([
+       {name: 'コム・デ・ギャルソン'},
+       {name: 'ユニクロ' },
+       {name: '古着' },
+       {name: 'GU' },
+       {name: 'digawal' },
+       {name: 'gosharubchinsky' }
+      ]
+   )

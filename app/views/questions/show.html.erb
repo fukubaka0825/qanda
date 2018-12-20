@@ -10,6 +10,13 @@
         <div>
              名前: <%= @question.name %>
         </div>
+        <% if @question.tags.any? %>
+        <div>
+         <% @question.tags.each do |tag| %>
+      <span class="badge badge-primary"><%= tag.name %></span>
+         <% end %>
+         </div>
+        <% end %>
         <hr>
         <div>
             <h3>回答一覧</h3> 
@@ -18,19 +25,26 @@
                 <% if @question.answers.any? %>
                 <thead class="thead-light">
                     <tr>
+                        <td></td>
+                         <td>名前</td>
                         <td>回答</td>
-                        <td>名前</td>
                         <td>メニュー</td>
                     </tr>
                 </thead>
                 <tbody>
                     <% @question.answers.each do |answer| %>
+                    
                     <tr>
+                        <td> 
+                        <% if !answer.user.nil? %>
+                           <%= gravatar_for answer.user %>
+                         <% end %>
+                         </td>
+                         <td>
+                            <%= answer.name %>
+                        </td>
                         <td>
                             <%= answer.content %>
-                        </td>
-                          <td>
-                            <%= answer.name %>
                         </td>
                         <td>[<%= link_to '編集',edit_question_answer_path(@question,answer) %>]
                         [<%= link_to '削除',question_answer_path(@question,answer),
@@ -48,6 +62,9 @@
          <hr>
         <h3>回答投稿</h3>
         <%= form_with model: [@question,@answer],local: true do |f| %>
+        <% if @current_user %> 
+          <%= f.hidden_field:user_id,{ value: @current_user.id} %>
+        <% end %>
         <%= f.hidden_field:question_id,{ value: @question.id} %>
         <div class="form-qroup">
             <label>名前</label>
@@ -57,7 +74,7 @@
             <label>内容</label>
         <%= f.text_area:content,class: 'form-control' %>
         <div class="text-center">
-            <%= f.submit "Post",class: 'btn btn-primary' %>
+            <%= f.submit "投稿",class: 'btn btn-primary' %>
         </div>
         <% end %>
          </div>
