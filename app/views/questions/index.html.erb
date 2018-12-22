@@ -48,9 +48,11 @@
                     </td>
                     <td><%= question.updated_at.to_s(:datetime_jp) %></td>
                     <td>
+                         <% if @current_user %>
                         <% if (@current_user && @current_user.id == question.user_id) || @current_user.admin %>
                         [<%= link_to '編集',edit_question_path(question) %>]
                         [<%= link_to '削除',question_path(question),method: :delete, data:{ confirm: '本当に削除しますか'} %>]
+                        <% end %>
                         <% end %>
                     </td>
                 </tr>
