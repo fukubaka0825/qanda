@@ -1,0 +1,6 @@
+<h1>ユーザー修正</h1>
+<div class="gravatar_edit">
+      <%= gravatar_for @user %>
+      <a href="http://gravatar.com/emails" rel="noopener" target="_blank">アイコン変更</a>
+    </div>
+<%= render partial: 'form', locals: { user: @user } %>

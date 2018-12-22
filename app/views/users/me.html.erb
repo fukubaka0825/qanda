@@ -1,17 +1,22 @@
 <h1>マイページ</h1>
-<%= @current_user.name %>
-<div class="row">
-  <aside class="col-md-4">
-    <section class="user_info">
-      <div>
-        <%= gravatar_for @current_user %>
-      </div>
-      <div>
-       <%= @current_user.name %>
-       </div>
-       <div>
-       <%= @current_user.email %>
-       </div>
-      </h1>
-  </aside>
+<div class = "row">
+  <div class = "col-md-6">
+     <table class = "table table-striped">
+       <tr>
+         <td>アイコン</td>
+         <td><%= gravatar_for @current_user %></td>
+       <tr>
+         <td>名前</td>
+         <td><%= @current_user.name %></td>
+       </tr>
+       <tr>
+         <td>メールアドレス</td>
+         <td><%= @current_user.email %></td>
+       </tr>
+       <tr>
+         <td></td>
+         <td>[<%= link_to '編集',edit_user_path(@current_user) %>]</td>
+        </tr>
+    </table>
+  </div>
 </div>

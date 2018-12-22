@@ -1,0 +1,32 @@
+<h1>ユーザー一覧</h1>
+<div class = row>
+    <div class = "col-md-12">
+        <table class = "table table-striped">
+            <thead class="thead-light">
+                <tr>
+                    <th></th>
+                    <th>名前</th>
+                    <th>最終更新日時</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <% @users.each do|user| %>
+                <tr>
+                    <td>
+                      <%= gravatar_for user %>
+                    </td>
+                    <td><%= user.name %></td>
+                    <td><%= user.updated_at.to_s(:datetime_jp) %></td>
+                    <td>
+                        [<%= link_to '編集',edit_user_path(user) %>]
+                        [<%= link_to '削除',user_path(user),method: :delete, data:{ confirm: '本当に削除しますか'} %>]
+                    </td>
+                </tr>
+                <% end %>
+            </tbody>
+        </table>
+        <%= paginate @users %>
+    </div>
+</div>
+        

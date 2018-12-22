@@ -5,7 +5,8 @@ class AnswersController < ApplicationController
    @question = Question.find(params[:question_id]) 
    @answer = Answer.new
    if @answer.update(answer_params)
-     redirect_to question_path(@question), notice: '回答投稿しました'
+      @question.update(updated_at: @answer[:updated_at])
+      redirect_to question_path(@question), notice: '回答投稿しました'
    else
      redirect_to question_path(@question),alert: '回答投稿に失敗しました'
    end
@@ -16,7 +17,8 @@ class AnswersController < ApplicationController
   end
   def update
    if @answer.update(answer_params)
-     redirect_to question_path(@question), notice: '回答を修正しました'
+    @question.update(updated_at: @answer[:updated_at])
+    redirect_to question_path(@question), notice: '回答を修正しました'
    else
      flash[:alert]='回答投稿に失敗しました'
      render :edit

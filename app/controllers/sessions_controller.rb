@@ -5,6 +5,8 @@ class SessionsController < ApplicationController
       session[:user_id] = user.id
       redirect_to mypage_path
     else
+      # TODO
+      # ここにエラーメッセージ
       render 'home/index'
     end
   end
