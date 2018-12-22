@@ -1,8 +1,14 @@
 <div>
     <div class = "col-md-4 offset-md-4">
         <h2 class = "text-center">
-            質問投稿画面
+            スレッド投稿画面
         </h2>
+        <div>
+            <%= gravatar_for @current_user %>
+        </div>
+        <div>
+            名前: <%= @current_user.name %>
+        </div>
        <%= render 'form' %>
     </div>
 </div>

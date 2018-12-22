@@ -1,6 +1,5 @@
-<h1>脱オタクファッションサロン</h1>
 <div class="d-flex align-items-center">
-  <h1>掲示板一覧</h1>
+  <h1>スレッド一覧</h1>
   <div class="ml-auto boards__linkBox">
     <%= form_tag questions_path, method: :get, class: 'questions__searchForm' do %>
       <%= select_tag :tag_id,
@@ -12,7 +11,9 @@
                      }
       %>
     <% end %>
+    <% if @current_user %>
             <%= link_to '新規作成', new_question_path,class: 'btn btn-outline-dark' %>
+    <% end %>
   </div>
 </div>
 <div class = row>
@@ -22,9 +23,10 @@
                 <tr>
                     <th></th>
                     <th>名前</th>
-                    <th>題名</th>
+                    <th>タイトル</th>
                     <th>タグ</th>
-                    <th>メニュー</th>
+                    <th>最終更新日時</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -44,10 +46,12 @@
                         <% end %>
                     <% end %>
                     </td>
-                    
-                    
-                    <td>[<%= link_to '編集',edit_question_path(question) %>]
-                    [<%= link_to '削除',question_path(question),method: :delete, data:{ confirm: '本当に削除しますか'} %>]
+                    <td><%= question.updated_at.to_s(:datetime_jp) %></td>
+                    <td>
+                        <% if (@current_user && @current_user.id == question.user_id) || @current_user.admin == true %>
+                        [<%= link_to '編集',edit_question_path(question) %>]
+                        [<%= link_to '削除',question_path(question),method: :delete, data:{ confirm: '本当に削除しますか'} %>]
+                        <% end %>
                     </td>
                 </tr>
                 <% end %>

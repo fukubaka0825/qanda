@@ -1,15 +1,22 @@
 <div class = "row">
-    <div class = "col-md-12">
-        <h2><%= @question.title %></h2>
-        <div>
-            質問内容: <%= @question.content %>
-            </div>
-        <div>
+   <div class = "col-md-12">
+        <section class="user_info">
+            <%= gravatar_for @question.user %>
+            <%= @question.user.name %>
+         </section>
+     <table class = "table table-striped">
+       <tr>
+         <td>タイトル</td>
+         <td><%= @question.title %></td>
+       <tr>
+         <td>スレッド内容</td>
+         <td><%= @question.content %></td>
+       </tr>
+     </table>
+       <div>
             <%= image_tag @question.picture.url if @question.picture? %>
         </div>
-        <div>
-             名前: <%= @question.name %>
-        </div>
+        
         <% if @question.tags.any? %>
         <div>
          <% @question.tags.each do |tag| %>
@@ -19,7 +26,7 @@
         <% end %>
         <hr>
         <div>
-            <h3>回答一覧</h3> 
+            <h3>レス一覧</h3> 
             <table class = "table table-striped">
                 <!--質問に配列で回答入ってるよ-->
                 <% if @question.answers.any? %>
@@ -27,8 +34,8 @@
                     <tr>
                         <td></td>
                          <td>名前</td>
-                        <td>回答</td>
-                        <td>メニュー</td>
+                         <td>内容</td>
+                         <td></td>
                     </tr>
                 </thead>
                 <tbody>
@@ -46,30 +53,35 @@
                         <td>
                             <%= answer.content %>
                         </td>
-                        <td>[<%= link_to '編集',edit_question_answer_path(@question,answer) %>]
-                        [<%= link_to '削除',question_answer_path(@question,answer),
-                        method: :delete, data:{ confirm: '本当に削除しますか？'} %>]
+                        <td>
+                             <% if @current_user && @current_user.id == answer.user_id %>
+                                   [<%= link_to '編集',edit_question_answer_path(@question,answer) %>]
+                                   [<%= link_to '削除',question_answer_path(@question,answer),
+                                   method: :delete, data:{ confirm: '本当に削除しますか？'} %>]
+                             <% end %>
                         </td>
                     </tr>
                     <% end %>
                 </tbody>
                 <% else %>
-                <p>回答はありません</p>
+                <p>レスはありません。投稿してみませんか？</p>
                 <% end %>
                 </table>
-                
         </div>
+        
          <hr>
-        <h3>回答投稿</h3>
+        <% if @current_user %>
+        <div>
+            <h2>レス投稿</h2>
+        </div>
+         <section class="user_info">
+            <%= gravatar_for @current_user %>
+            <%= @current_user.name %>
+         </section>
         <%= form_with model: [@question,@answer],local: true do |f| %>
-        <% if @current_user %> 
+          <%= f.hidden_field:name,{ value: @current_user.name} %>
           <%= f.hidden_field:user_id,{ value: @current_user.id} %>
-        <% end %>
-        <%= f.hidden_field:question_id,{ value: @question.id} %>
-        <div class="form-qroup">
-            <label>名前</label>
-        <%= f.text_field:name,class: 'form-control' %>
-         </div>
+          <%= f.hidden_field:question_id,{ value: @question.id} %>
         <div class="form-qroup">
             <label>内容</label>
         <%= f.text_area:content,class: 'form-control' %>
@@ -78,8 +90,9 @@
         </div>
         <% end %>
          </div>
+        <% end %>
         <div>
-            <%= link_to '質問一覧へ',root_path %>
+            <%= link_to 'スレッド一覧へ',questions_path %>
         </div>
     </div>
 </div>
