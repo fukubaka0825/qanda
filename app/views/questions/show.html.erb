@@ -1,5 +1,5 @@
 <div class = "row">
-   <div class = "col-md-12">
+   <div class = "col-md-12"> 
         <section class="user_info">
             <%= gravatar_for @question.user %>
             <%= @question.user.name %>
@@ -36,6 +36,7 @@
                          <td>名前</td>
                          <td>内容</td>
                          <td></td>
+                         <td></td>
                     </tr>
                 </thead>
                 <tbody>
@@ -52,6 +53,9 @@
                         </td>
                         <td>
                             <%= answer.content %>
+                        </td>
+                        <td>
+                         <%= image_tag answer.picture.url if answer.picture? %>
                         </td>
                         <td>
                              <% if @current_user && @current_user.id == answer.user_id %>
@@ -84,7 +88,10 @@
           <%= f.hidden_field:question_id,{ value: @question.id} %>
         <div class="form-qroup">
             <label>内容</label>
-        <%= f.text_area:content,class: 'form-control' %>
+        <%= f.text_area:content,class: 'form-control',rows: '6' %>
+        <span class="picture">
+            <%= f.file_field :picture %>
+        </span>
         <div class="text-center">
             <%= f.submit "投稿",class: 'btn btn-primary' %>
         </div>
