@@ -4,24 +4,6 @@
         <h2 class = "text-center">
          投稿編集画面
         </h2> 
-        <section class="user_info">
-            <h3>
-              <%= gravatar_for @current_user %>
-              <%= @current_user.name %>
-            </h3>
-        </section>
-    <%= form_with model:[@question,@answer],local: true do |f| %>
-      <%= f.hidden_field:user_id,{ value: @current_user.id} %>
-      <%= f.hidden_field:name,{ value: @current_user.name} %>
-      <div class="form-group">
-       <div class="form-group">
-            <label>回答</label>
-            <%= f.text_area :content,class: 'form-control',rows: '8' %>
-        </div>
-        <div class="text-center">
-            <%= f.submit "編集",class: "btn btn-primary" %>
-        </div>
-        <% end %>
+       <%= render 'form' %>
     </div>
   </div>
-</div>
