@@ -1,3 +1,4 @@
+　<%= render 'shared/error_messages' %>
 　 <%= form_with model: @question, local: true  do |f| %>
   <% if @current_user %> 
   <%= f.hidden_field:user_id,{ value: @current_user.id} %>

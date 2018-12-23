@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_23_023309) do
+ActiveRecord::Schema.define(version: 2018_12_23_052836) do
 
   create_table "answers", force: :cascade do |t|
     t.integer "question_id"
@@ -60,6 +60,7 @@ ActiveRecord::Schema.define(version: 2018_12_23_023309) do
     t.integer "question_id"
     t.integer "answer_id"
     t.boolean "admin"
+    t.string "profile"
     t.index ["answer_id"], name: "index_users_on_answer_id"
     t.index ["name"], name: "index_users_on_name", unique: true
     t.index ["question_id"], name: "index_users_on_question_id"

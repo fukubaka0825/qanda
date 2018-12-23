@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" href="#">CFS</a>
+  <a class="navbar-brand" href="#">CFOS</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -7,12 +7,8 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-          <% if @current_user %>
           <!--ヘルパーで今表示しているページのリンクの時だけアクティブに-->
-            <%= header_link_item('ホーム', questions_path) %>
-          <% else %>
             <%= header_link_item('ホーム', root_path) %>
-          <% end %>
       </li>
       <li class="nav-item">
         <%= header_link_item('スレッド一覧', questions_path) %>
@@ -25,14 +21,11 @@
           <% if @current_user %>
             <%= link_to 'マイページ', mypage_path, class: 'dropdown-item' %>
             <%= link_to 'ログアウト', logout_path, method: :delete, class: 'dropdown-item' %>
-            <!----adminのデフォルトがnilなので素直に分岐させられない、、、--->
-            <% if @current_user.admin == true %>
-             <%= link_to 'ユーザー一覧', users_path, class: 'dropdown-item' %>
-            <% end %>
           <% else %>
             <%= link_to '登録', new_user_path, class: 'dropdown-item' %>
             <%= link_to 'ログイン', home_new_path, class: 'dropdown-item' %>
           <% end %>
+          <%= link_to 'メンバー一覧', users_path, class: 'dropdown-item' %>
         </div>
       </li>
     </ul>

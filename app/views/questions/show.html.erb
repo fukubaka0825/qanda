@@ -1,3 +1,4 @@
+　<%= render 'shared/error_messages' %>
 <div class = "row">
    <div class = "col-md-12"> 
         <section class="user_info">
@@ -10,7 +11,7 @@
          <td><%= @question.title %></td>
        <tr>
          <td>スレッド内容</td>
-         <td><%= @question.content %></td>
+         <td><%= simple_format(@question.content) %></td>
        </tr>
      </table>
        <div>
@@ -52,16 +53,16 @@
                             <%= answer.name %>
                         </td>
                         <td>
-                            <%= answer.content %>
+                            <%= simple_format(answer.content) %>
                         </td>
                         <td>
                          <%= image_tag answer.picture.url if answer.picture? %>
                         </td>
                         <td>
                              <% if @current_user && @current_user.id == answer.user_id %>
-                                   [<%= link_to '編集',edit_question_answer_path(@question,answer) %>]
-                                   [<%= link_to '削除',question_answer_path(@question,answer),
-                                   method: :delete, data:{ confirm: '本当に削除しますか？'} %>]
+                                   <%= button_to '編集',edit_question_answer_path(@question,answer),{method: :get} %>
+                                   <%= button_to '削除',question_answer_path(@question,answer),
+                                   method: :delete, data:{ confirm: '本当に削除しますか？'} %>
                              <% end %>
                         </td>
                     </tr>
@@ -88,7 +89,7 @@
           <%= f.hidden_field:question_id,{ value: @question.id} %>
         <div class="form-qroup">
             <label>内容</label>
-        <%= f.text_area:content,class: 'form-control',rows: '6' %>
+        <%= f.text_area:content,class: 'form-control',rows: '6',cols: '10' %>
         <span class="picture">
             <%= f.file_field :picture %>
         </span>

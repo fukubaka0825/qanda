@@ -14,8 +14,16 @@
          <td><%= @current_user.email %></td>
        </tr>
        <tr>
+         <td>自己紹介</td>
+         <td>
+         <% if @current_user.profile.present? %>
+           <%= simple_format(@current_user.profile) %>
+         <% end %>
+         </td>
+       </tr>
+       <tr>
          <td></td>
-         <td>[<%= link_to '編集',edit_user_path(@current_user) %>]</td>
+         <td><%= button_to '編集',edit_user_path(@current_user),{method: :get} %></td>
         </tr>
     </table>
   </div>

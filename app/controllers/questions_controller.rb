@@ -11,25 +11,29 @@ class QuestionsController < ApplicationController
   end
 
   def new
-    @question = Question.new
+    @question = Question.new(flash[:question])
   end
   
   def create
     @question = Question.new(question_params)
     # if @question.save! !でエラー吐くようにできる
     if @question.save
-      redirect_to questions_path, notice: '掲示板を作成しました'
+      redirect_to questions_path, notice: 'スレッドを作成しました'
     else
-      flash[:alert] = '掲示板作成失敗しました'
-      render :new
+       redirect_to new_question_path ,flash: {
+        question: @question,
+        error_messages: @question.errors.full_messages
+      }
     end
   end
   def update
      if @question.update(question_params)
-      redirect_to questions_path, notice: '質問を修正しました'
-    else
-      flash[:alert] = '質問失敗しました'
-      render :new
+      redirect_to questions_path, notice: 'スレッドを修正しました'
+     else
+       redirect_to edit_question_path ,flash: {
+        question: @question,
+        error_messages: @question.errors.full_messages
+       }
      end
   end
 

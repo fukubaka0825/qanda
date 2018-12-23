@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user,only: [:edit,:update,:destroy]
+  before_action :set_user,only: [:show,:update,:edit,:destroy]
   
   def index
     @users = User.page(params[:page]).per(20).order('updated_at DESC')
@@ -23,16 +23,21 @@ class UsersController < ApplicationController
     end
   end
   
+  def show
+  end
+  
   def edit
   end
   
   def update
-   if @user.update(user_params)
-      redirect_to mypage_path, notice: 'ユーザーを修正しました'
+    if @user.update(user_params)
+      redirect_to mypage_path
     else
-      flash[:alert] = 'ユーザー修正失敗しました'
-      render :new
-   end
+      redirect_to edit_user_path ,flash: {
+        user: @user,
+        error_messages: @user.errors.full_messages
+      }
+    end
   end
   
   def destroy
@@ -51,6 +56,6 @@ class UsersController < ApplicationController
   end
   
   def user_params
-    params.require(:user).permit(:name,:email,:password,:password_confirmation)
+    params.require(:user).permit(:name,:email,:password,:password_confirmation,:profile)
   end
 end
