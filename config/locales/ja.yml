@@ -8,10 +8,17 @@ ja:
           has_many: "%{record}が存在しているので削除できません"
     attributes:
       user:
-        Name: ユーザー名
+        name: ユーザー名
         password: パスワード
         password_confirmation: パスワード（確認）
         email: メールアドレス
+      question:
+        title: タイトル
+        content: スレッド内容
+      answer:
+        content: レス内容
+        
+        
   date:
     abbr_day_names:
     - 日
