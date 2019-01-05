@@ -1,9 +1,11 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
+* how to use this software
+1.please access following URL.
+https://fukubaka0825.herokuapp.com
+2.sign in or use following sample account.
+id:sample
+password:sample1234
 
 * Ruby version
 
