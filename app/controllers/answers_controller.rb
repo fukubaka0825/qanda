@@ -3,6 +3,7 @@ class AnswersController < ApplicationController
   def create
     # 紐づいてる回答も引っ張ってきてる　二回SQL投げてる
    @question = Question.find(params[:question_id]) 
+   
    @answer = Answer.new(answer_params)
    if @answer.save
       @question.update(updated_at: @answer[:updated_at])
@@ -11,7 +12,9 @@ class AnswersController < ApplicationController
         redirect_to question_path(@question) ,flash: {
         answer: @answer,
         error_messages: @answer.errors.full_messages
-      }
+
+    }
+
    end
   end
   
