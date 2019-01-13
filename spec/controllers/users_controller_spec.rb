@@ -18,9 +18,9 @@ RSpec.describe UsersController, type: :controller do
     end
     describe 'POST #create' do
         before do
-            @referer = 'http://localhost'
+            @referer = 'http://test.host/users/new'
             # redirect先はヘッダーの下記の値を取りに行っている、アクション前のURL
-            @request.env['HTTP_REFERER'] = @referer
+            # request.env['HTTP_REFERER'] = @referer
         end
 
         context '正しいユーザー情報が渡ってきた場合' do
