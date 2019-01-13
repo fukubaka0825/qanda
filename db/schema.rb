@@ -14,8 +14,8 @@ ActiveRecord::Schema.define(version: 2018_12_23_052836) do
 
   create_table "answers", force: :cascade do |t|
     t.integer "question_id"
-    t.string "name"
-    t.text "content"
+    t.string "name", null: false
+    t.text "content", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id"
@@ -34,9 +34,9 @@ ActiveRecord::Schema.define(version: 2018_12_23_052836) do
   end
 
   create_table "questions", force: :cascade do |t|
-    t.string "name"
-    t.string "title"
-    t.text "content"
+    t.string "name", null: false
+    t.string "title", null: false
+    t.text "content", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "picture"
@@ -59,7 +59,7 @@ ActiveRecord::Schema.define(version: 2018_12_23_052836) do
     t.string "picture"
     t.integer "question_id"
     t.integer "answer_id"
-    t.boolean "admin"
+    t.boolean "admin", default: false
     t.string "profile"
     t.index ["answer_id"], name: "index_users_on_answer_id"
     t.index ["name"], name: "index_users_on_name", unique: true
